@@ -1,0 +1,51 @@
+Generate a {{ com_name }} ({{ sci_name }}) {{ pose_phrase }}, in the style of an Edo-period Japanese kachō-e woodblock print, in the manner of Ohara Koson.
+
+The bird must be rendered with VERY FEW MARKS: the body is essentially 2-4 flat colour zones with sharp boundaries. Almost no internal texture - no feather-by-feather rendering, no stippling, no gradient shading. It should look painted in about 30 confident brush strokes: a few flat colour zones, a few outline strokes, an accent stroke or two for major wing or tail markings, and that is all.
+
+Confident sumi-e ink linework with soft watercolour washes. Earthy, restrained palette. The body should look like flat painted paper - not a textured surface, not shaded volume. If the species has subtle plumage variation (streaking, mottling, fine barring), ABSTRACT it into 2-3 broad zones rather than rendering it literally. Eye, beak and feet are drawn with crisp ink - these are the only places where confident dark line is appropriate.
+
+The bird sits on a CONSISTENT WARM CREAM tonal background, like aged Japanese mulberry paper. The cream ground fills the entire frame and is identical across every print. It is the ONLY background element: NO branch, NO twig, NO perch, NO leaves, NO foliage, NO scenery, NO sky, NO moon, NO water - only the bird floating against the cream paper ground. The perch is implied purely by toe posture; it is NEVER drawn. NO border, NO frame, NO text, NO signature.
+
+Composition: the bird occupies one-third to one-half of the frame, with generous negative space around it. Sparse and confident, not packed with detail. The ENTIRE bird must fit inside the frame - head, {{ 'both wings fully spread wingtip to wingtip' if pose == 'flying' else 'the folded wing' }}, full tail, legs, feet and beak. Do NOT crop any body part at the edge; leave clear padding on all four sides.
+
+## Species accuracy - THIS OVERRIDES STYLE
+
+The stylisation is in HOW the marks are made, never in WHICH markings exist. Simplify the technique, never the truth: every colour zone you draw must sit exactly where this species has it. The single most common failure is drifting toward a more famous relative - do not do this. Render {{ com_name }} specifically.
+
+Pay attention to the EXTENT of each colour zone, not just its presence. Exactly how far a pale throat or belly reaches toward the bill, the eye and the rump; exactly where a dark cap stops. A boundary drawn in the wrong place makes the illustration wrong, however beautiful the brushwork. Do NOT invent generic markings: no face mask, no wingbars, no crest, no streaking unless this species actually has them.
+{% if description %}
+### Authoritative description of {{ com_name }} - follow it exactly
+
+{{ description }}
+
+Treat the text above as ground truth for plumage, colour and proportion. Where it names similar or confusable species, those are precisely the birds you must NOT drift toward.
+{% endif %}{% if n_refs %}
+### Reference photos
+
+{{ n_refs }} photo{{ 's' if n_refs > 1 else '' }} of an adult {{ com_name }} {{ 'are' if n_refs > 1 else 'is' }} attached, showing the species from different angles. They are the ground truth for what this bird looks like.
+
+Take ANATOMY, COLOUR and PROPORTION from them, and nothing else. Do NOT copy their photographic style, background, perch or scenery, and do NOT reproduce their fine feather detail - restate what they show as flat woodblock zones. Cross-check the colour-zone boundaries across every photo: a feature hidden at one angle is often obvious at another. If a photo shows worn or non-breeding plumage, render the brightest BREEDING (adult-summer) plumage instead.
+{% endif %}
+### Anatomy
+
+- EXACTLY TWO wings (count them: one left, one right). EXACTLY TWO legs. EXACTLY ONE head. EXACTLY ONE beak. EXACTLY ONE tail.
+- Feet are SMALL. Tarsi run roughly 10-15% of body height for finches, sparrows and warblers, 15-20% for jays and thrushes, and stay under 25% even for ducks, hawks and owls. Slim tarsi, small delicate toes. Do NOT exaggerate the feet or the claws; the bird is not a chicken or a crab.
+
+### Pose - {{ pose_phrase|upper }}
+{% if pose == 'flying' %}
+Draw the bird AIRBORNE, seen so that both wings read clearly: both wings fully extended in a natural flapping position, spread wingtip to wingtip, with the flight feathers as a few confident strokes rather than individually drawn quills. The tail is fanned or forked as the species requires.
+
+The legs and feet are tucked tight against the belly with the toes folded out of sight, or trailed straight back along the line of the tail. Do NOT dangle the feet below the body with the toes splayed, and do NOT draw the bird in a standing or perching posture with its wings merely raised.
+{% else %}
+Draw the bird PERCHED: one wing folded against the body, the other tucked behind. Both feet are visible beneath the body, the toes curled gently forward as if grasping a thin branch - but the branch itself is NOT drawn. The bird floats in space, its posture alone implying the perch.
+{% endif %}
+{% if corrections %}
+## CORRECTIONS - a previous attempt was rejected
+
+Your previous attempt at this illustration was checked against the references and found factually WRONG. Fix every point below while keeping the style described above. These corrections take priority over your instinct about what this bird looks like:
+
+{{ corrections }}
+{% endif %}
+### Output
+
+Render at high resolution. The uniform warm cream ground is the ONLY background - no shadow, no paper texture, no border, no caption.
