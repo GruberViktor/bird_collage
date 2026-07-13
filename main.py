@@ -18,14 +18,16 @@ a new day costs a few cents and every rebuild of it is free.
 import argparse
 import sys
 from pathlib import Path
+from dotenv import load_dotenv
 
 import httpx
 
 sys.path.insert(0, str(Path(__file__).resolve().parent / "illustration_generator"))
+load_dotenv()
 
 from collage import build_collage  # noqa: E402
 
-BIRDNET_URL = "http://birdie:8080/api/v2/analytics/species/daily"
+BIRDNET_URL = "http://localhost:8080/api/v2/analytics/species/daily"
 
 
 def get_bird_summary() -> list[dict]:
@@ -60,7 +62,7 @@ def main() -> None:
         try:
             species = get_bird_summary()
             species = list(
-                filter(lambda s: s.get("species_code"), species)
+                filter(lambda s: s.get("species_code") is not None and s.get("count") > 1, species)
             )  # only keep birds, no grasshoppers or other non-birds
         except httpx.HTTPError as e:
             print(f"could not reach BirdNET-Go at {BIRDNET_URL}: {e}")

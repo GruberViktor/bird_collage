@@ -10,6 +10,6 @@ wheels/
 .venv
 
 _*
-
+.env
 illustration_generator/wikipedia/*
 illustration_generator/test*

@@ -59,7 +59,7 @@ from pregen import POSES, get_bird_illustration, illustration_path
 CANVAS_W, CANVAS_H = 1200, 1600
 
 MARGIN = 50  # the collage must reach within this of the canvas edge
-SPACING = 40  # clear air between the closest points of two birds
+SPACING = 30  # clear air between the closest points of two birds
 MIN_BIRD_HEIGHT = 150  # the smallest bird's height, before the global fit scale
 MAX_SIZE_RATIO = 4  # the largest bird is at most this many times the smallest
 
@@ -477,6 +477,14 @@ def build_collage(
             h = round(MIN_BIRD_HEIGHT * b.factor * scale)
             print(f"  {b.count:>4}x {b.sci:<24} {b.pose:<8} {h:>4}px")
     canvas = render(placements, outline=outline)
+    canvas = cv2.rotate(canvas, cv2.ROTATE_90_COUNTERCLOCKWISE)
+    #increase the contrast of the final image
+    lab = cv2.cvtColor(canvas, cv2.COLOR_BGR2LAB)
+    l, a, b = cv2.split(lab)
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+    cl = clahe.apply(l)
+    limg = cv2.merge((cl, a, b))
+    canvas = cv2.cvtColor(limg, cv2.COLOR_LAB2BGR)
     cv2.imwrite(str(out), canvas)
     print(f"\nwrote {out} ({CANVAS_W}x{CANVAS_H}, {len(placements)} birds)")
     return out
