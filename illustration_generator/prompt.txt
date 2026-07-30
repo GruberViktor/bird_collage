@@ -33,7 +33,7 @@ Take ANATOMY, COLOUR and PROPORTION from them, and nothing else. Do NOT copy the
 
 ### Pose - {{ pose_phrase|upper }}
 {% if pose == 'flying' %}
-Draw the bird AIRBORNE, seen so that both wings read clearly: both wings fully extended in a natural flapping position, spread wingtip to wingtip, with the flight feathers as a few confident strokes rather than individually drawn quills. The tail is fanned or forked as the species requires.
+Draw the bird AIRBORNE, seen so that both wings read clearly: both wings fully extended in a natural flapping position, spread wingtip to wingtip, with the flight feathers as a few confident strokes rather than individually drawn quills. The tail is fanned or forked as the species requires. (If the requested animal is not in fact a bird, please disregard this)
 
 The legs and feet are tucked tight against the belly with the toes folded out of sight, or trailed straight back along the line of the tail. Do NOT dangle the feet below the body with the toes splayed, and do NOT draw the bird in a standing or perching posture with its wings merely raised.
 {% else %}

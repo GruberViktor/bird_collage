@@ -28,6 +28,7 @@ load_dotenv()
 from collage import build_collage  # noqa: E402
 
 BIRDNET_URL = "http://localhost:8080/api/v2/analytics/species/daily"
+IGNORED_SPECIES = ["Pseudochorthippus parallelus", "Pholidoptera griseoaptera", "Tettigonia viridissima"]
 
 
 def get_bird_summary() -> list[dict]:
@@ -62,7 +63,7 @@ def main() -> None:
         try:
             species = get_bird_summary()
             species = list(
-                filter(lambda s: s.get("species_code") is not None and s.get("count") > 1, species)
+                filter(lambda s: s.get("count") > 1 and s.get("species_name") not in IGNORED_SPECIES, species)
             )  # only keep birds, no grasshoppers or other non-birds
         except httpx.HTTPError as e:
             print(f"could not reach BirdNET-Go at {BIRDNET_URL}: {e}")
